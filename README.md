@@ -1,4 +1,8 @@
 # aeuxglobal_ecoplastic_dashboard
+<p align="center">
+  <img src="assets/preview.png" alt="Dashboard Preview" width="900"/>
+</p>
+
 
 Dashboard web dinamis berbasis **vanilla JavaScript + Tailwind (CDN)** — tanpa build step, tanpa framework. Siap di-fork/rebrand oleh siapa saja: cukup edit satu file config.
 
