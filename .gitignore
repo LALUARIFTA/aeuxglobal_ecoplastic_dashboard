@@ -1,0 +1,15 @@
+# Editor/tool artifacts
+.dist/
+.qodo/
+.vscode/
+.idea/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Dependencies (future-proof)
+node_modules/
+
+# Logs
+*.log

@@ -1,0 +1,340 @@
+:root {
+  --bg-shell: #0d1510;
+  --bg-panel: #f4f6f4;
+  --accent-green: #2cc965;
+  --accent-green-dark: #1d8f46;
+  --card-sage: #d7e5d9;
+  --card-dark: #0f1b13;
+}
+
+* {
+  box-sizing: border-box;
+  user-select: none;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Plus Jakarta Sans', 'Inter', -apple-system, sans-serif;
+  /* Emerald background matching the reference photo */
+  background: radial-gradient(circle at 85% 20%, #2eb657 0%, #1c7838 42%, #134b25 85%, #0e381b 100%);
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ambient floating glow behind the main frame */
+.ambient-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(600px circle at 20% 15%, rgba(74, 222, 128, 0.14), transparent 60%),
+    radial-gradient(700px circle at 85% 80%, rgba(16, 185, 129, 0.2), transparent 65%);
+  z-index: 0;
+}
+
+/* Fixed Uniform Outer Application Frame across ALL menus */
+.app-frame {
+  position: relative;
+  z-index: 10;
+  width: min(1380px, 96vw);
+  height: min(850px, 93vh);
+  min-height: 600px;
+  background: linear-gradient(160deg, #132018 0%, #0b120e 55%, #090f0b 100%);
+  border-radius: 30px;
+  padding: 14px;
+  box-shadow:
+    0 35px 80px -15px rgba(0, 0, 0, 0.65),
+    0 12px 30px -8px rgba(5, 25, 12, 0.6),
+    inset 0 1px 1px rgba(255, 255, 255, 0.12),
+    inset 0 0 0 1px rgba(46, 182, 87, 0.12);
+  display: flex;
+  gap: 14px;
+  overflow: hidden;
+}
+
+/* Sidebar fixed width and full height */
+.sidebar {
+  width: 242px;
+  flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 12px 12px 14px;
+  color: #e2e8f0;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.sidebar::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Right Content Viewport - Strictly Uniform Size across all menus */
+.main-viewport {
+  flex: 1;
+  height: 100%;
+  background-color: var(--bg-panel);
+  border-radius: 22px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8);
+}
+
+/* Custom Scrollbar for inner scrollable content */
+.content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 4px 26px 28px 26px;
+  scroll-behavior: smooth;
+}
+
+.content-scroll::-webkit-scrollbar {
+  width: 7px;
+}
+.content-scroll::-webkit-scrollbar-track {
+  background: rgba(15, 27, 19, 0.04);
+  border-radius: 999px;
+  margin: 8px 0;
+}
+.content-scroll::-webkit-scrollbar-thumb {
+  background: rgba(29, 143, 70, 0.28);
+  border-radius: 999px;
+  transition: background 0.2s ease;
+}
+.content-scroll::-webkit-scrollbar-thumb:hover {
+  background: rgba(29, 143, 70, 0.55);
+}
+
+/* Signature tilted first KPI card matching the reference image */
+.tilted-pollution-card {
+  background: linear-gradient(135deg, #122117 0%, #0b150e 100%);
+  transform: rotate(-1.65deg);
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 14px 28px -8px rgba(11, 24, 15, 0.38);
+}
+.tilted-pollution-card:hover {
+  transform: rotate(0deg) translateY(-3px) scale(1.01);
+  box-shadow: 0 20px 35px -10px rgba(18, 56, 31, 0.5);
+}
+
+/* Standard white card hover micro-interaction */
+.dash-card {
+  background: #ffffff;
+  border-radius: 20px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  box-shadow: 0 4px 18px -4px rgba(16, 36, 22, 0.04);
+  border: 1px solid rgba(16, 36, 22, 0.04);
+}
+.dash-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -6px rgba(16, 36, 22, 0.08);
+}
+
+/* Sage Green CO2 card */
+.sage-card {
+  background: linear-gradient(145deg, #d9e7db 0%, #cfe0d2 100%);
+  border-radius: 20px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s ease;
+}
+.sage-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 26px -6px rgba(27, 77, 42, 0.12);
+}
+
+/* Dark Global Pollution Map Card */
+.dark-map-card {
+  background: radial-gradient(circle at 65% 55%, #16281d 0%, #0d1711 75%, #0a120d 100%);
+  border-radius: 20px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.dark-map-card:hover {
+  transform: translateY(-2px);
+}
+
+/* Menu & Sub-menu Page Transition Keyframes */
+@keyframes menuPageEnter {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.992);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes staggerItemUp {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes barGrowUp {
+  0% {
+    transform: scaleY(0.05);
+    opacity: 0.3;
+  }
+  100% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(44, 201, 101, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgba(44, 201, 101, 0);
+  }
+}
+
+.animate-page-enter {
+  animation: menuPageEnter 0.42s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+.stagger-1 { animation: staggerItemUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.03s both; }
+.stagger-2 { animation: staggerItemUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.09s both; }
+.stagger-3 { animation: staggerItemUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both; }
+.stagger-4 { animation: staggerItemUp 0.42s cubic-bezier(0.22, 1, 0.36, 1) 0.21s both; }
+
+.bar-anim {
+  transform-origin: bottom;
+  animation: barGrowUp 0.65s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+/* Sidebar Navigation Item Styling */
+.nav-btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 9px 11px;
+  border-radius: 13px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #9ca8a0;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  z-index: 2;
+}
+
+.nav-btn:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.nav-btn.active {
+  color: #ffffff;
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.08);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.nav-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.06);
+  color: #9ca8a0;
+  transition: all 0.25s ease;
+}
+
+.nav-btn.active .nav-icon-box {
+  background: rgba(255, 255, 255, 0.14);
+  color: #ffffff;
+}
+
+/* Sub-menu Tab Pill Animation */
+.submenu-tab {
+  position: relative;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #64746b;
+  transition: all 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.submenu-tab:hover {
+  color: #111c15;
+  background: rgba(17, 28, 21, 0.05);
+}
+
+.submenu-tab.active {
+  color: #ffffff;
+  background: #121d16;
+  box-shadow: 0 4px 10px -2px rgba(18, 29, 22, 0.25);
+}
+
+/* Map country path hover */
+.map-country {
+  transition: fill 0.25s ease, transform 0.25s ease, filter 0.25s ease;
+  cursor: pointer;
+  transform-box: fill-box;
+  transform-origin: center;
+}
+.map-country:hover {
+  filter: brightness(1.22) drop-shadow(0 0 6px rgba(74, 222, 128, 0.5));
+  transform: scale(1.03);
+}
+
+/* Frosted glass card on map */
+.glass-map-badge {
+  background: rgba(145, 168, 152, 0.32);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.45);
+}
+
+/* Responsive adjustments for smaller screens while keeping fixed shell ratio */
+@media (max-width: 1024px) {
+  .app-frame {
+    width: 98vw;
+    height: 95vh;
+    padding: 10px;
+    gap: 10px;
+  }
+  .sidebar {
+    width: 205px;
+    padding: 14px 8px;
+  }
+  .content-scroll {
+    padding: 4px 16px 20px 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 68px;
+    padding: 12px 6px;
+    align-items: center;
+  }
+  .sidebar-text-hide {
+    display: none !important;
+  }
+}

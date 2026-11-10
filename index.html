@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AeuxGlobal — EcoPlastic Sustainability Platform</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <!-- App stylesheet -->
+  <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body>
+
+  <!-- Ambient Emerald Backdrop Glow -->
+  <div class="ambient-glow"></div>
+
+  <!-- MAIN APPLICATION SHELL (Fixed Uniform Dimensions Across All Menus) -->
+  <div class="app-frame">
+
+    <!-- ==================== LEFT SIDEBAR ==================== -->
+    <aside class="sidebar">
+      <!-- Top Section -->
+      <div class="space-y-4">
+        <!-- Brand Logo -->
+        <div class="flex items-center gap-2.5 px-2 pt-0.5 cursor-pointer group" onclick="switchMenu('dashboard')">
+          <div class="flex items-end gap-[3px] h-5">
+            <span class="w-[4px] h-4 bg-[#2cc965] rounded-full transition-all duration-300 group-hover:h-5"></span>
+            <span class="w-[4px] h-5 bg-[#2cc965] rounded-full transition-all duration-300 group-hover:h-3.5"></span>
+            <span class="w-[4px] h-3.5 bg-[#2cc965] rounded-full transition-all duration-300 group-hover:h-5"></span>
+          </div>
+          <span id="brandName" class="text-[17px] font-bold tracking-tight text-white sidebar-text-hide">AeuxGlobal</span>
+        </div>
+
+        <!-- Team Workspace Switcher -->
+        <div class="relative">
+          <button id="workspaceBtn" onclick="toggleWorkspaceDropdown()" class="w-full bg-[#18231c] hover:bg-[#1e2c23] border border-white/[0.06] rounded-2xl p-2.5 flex items-center justify-between transition-all">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div id="workspaceBadgeIcon" class="w-8 h-8 rounded-xl bg-gradient-to-br from-[#37d670] to-[#198c40] flex items-center justify-center text-white shadow-md shadow-emerald-950/50 flex-shrink-0">
+                <!-- 4-point star / plus icon matching reference -->
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 2L14.4 9.6L22 12L14.4 14.4L12 22L9.6 14.4L2 12L9.6 9.6L12 2Z" />
+                </svg>
+              </div>
+              <div class="text-left truncate sidebar-text-hide">
+                <div class="text-[10px] text-[#7a8b80] font-medium leading-tight">Team Workspace</div>
+                <div id="currentWorkspaceName" class="text-[13px] font-semibold text-white truncate leading-snug">EcoPlastic</div>
+              </div>
+            </div>
+            <svg id="workspaceChevron" class="w-4 h-4 text-[#7a8b80] transition-transform duration-200 sidebar-text-hide flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </button>
+
+          <!-- Workspace Dropdown Menu (populated from assets/js/config.js) -->
+          <div id="workspaceDropdown" class="hidden absolute left-0 right-0 top-[56px] bg-[#16221a] border border-white/10 rounded-2xl p-1.5 shadow-2xl z-50 space-y-1"></div>
+        </div>
+
+        <!-- Search Input Box -->
+        <button onclick="openSearchModal()" class="w-full bg-[#17211a] hover:bg-[#1d2921] border border-white/[0.05] rounded-xl px-3 py-2 flex items-center justify-between text-[#7a8b80] transition group">
+          <div class="flex items-center gap-2 min-w-0">
+            <svg class="w-3.5 h-3.5 text-[#7a8b80] group-hover:text-white transition flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            </svg>
+            <span class="text-[12px] truncate sidebar-text-hide">Search for...</span>
+          </div>
+          <span class="text-[10px] font-semibold bg-white/[0.08] text-gray-300 px-1.5 py-0.5 rounded-md border border-white/[0.06] sidebar-text-hide">⌘+F</span>
+        </button>
+
+        <!-- NAVIGATION SECTION -->
+        <div class="pt-1">
+          <div class="px-2 pb-2 text-[10px] font-bold tracking-wider text-[#5b6b61] uppercase sidebar-text-hide">
+            Navigation
+          </div>
+
+          <nav class="space-y-1" id="sidebarNav">
+            <!-- 1. Dashboard -->
+            <button data-menu="dashboard" onclick="switchMenu('dashboard')" class="nav-btn active">
+              <div class="flex items-center gap-3">
+                <div class="nav-icon-box">
+                  <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M11.47 3.84a.75.75 0 011.06 0l8.69 8.69a.75.75 0 101.06-1.06l-8.689-8.69a2.25 2.25 0 00-3.182 0l-8.69 8.69a.75.75 0 001.061 1.06l8.69-8.69z" />
+                    <path d="M12 5.432l8.159 8.159c.03.03.06.058.091.086v6.198c0 1.035-.84 1.875-1.875 1.875H15a.75.75 0 01-.75-.75v-4.5a.75.75 0 00-.75-.75h-3a.75.75 0 00-.75.75V21a.75.75 0 01-.75.75H5.625a1.875 1.875 0 01-1.875-1.875v-6.198a2.29 2.29 0 00.091-.086L12 5.43z" />
+                  </svg>
+                </div>
+                <span class="sidebar-text-hide">Dashboard</span>
+              </div>
+            </button>
+
+            <!-- 2. Analytics -->
+            <button data-menu="analytics" onclick="switchMenu('analytics')" class="nav-btn">
+              <div class="flex items-center gap-3">
+                <div class="nav-icon-box">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"/>
+                  </svg>
+                </div>
+                <span class="sidebar-text-hide">Analytics</span>
+              </div>
+            </button>
+
+            <!-- 3. Team Structure -->
+            <button data-menu="team" onclick="switchMenu('team')" class="nav-btn">
+              <div class="flex items-center gap-3">
+                <div class="nav-icon-box">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/>
+                  </svg>
+                </div>
+                <span class="sidebar-text-hide">Team Structure</span>
+              </div>
+            </button>
+
+            <!-- 4. Reports (with badge 8) -->
+            <button data-menu="reports" onclick="switchMenu('reports')" class="nav-btn">
+              <div class="flex items-center gap-3">
+                <div class="nav-icon-box">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
+                  </svg>
+                </div>
+                <span class="sidebar-text-hide">Reports</span>
+              </div>
+              <span id="reportsBadgeCount" class="w-5 h-5 rounded-full bg-[#2cc965] text-[#09150d] text-[10px] font-extrabold flex items-center justify-center sidebar-text-hide">8</span>
+            </button>
+
+            <!-- 5. Support (with badge New) -->
+            <button data-menu="support" onclick="switchMenu('support')" class="nav-btn">
+              <div class="flex items-center gap-3">
+                <div class="nav-icon-box">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                </div>
+                <span class="sidebar-text-hide">Support</span>
+              </div>
+              <span class="px-2 py-0.5 rounded-full bg-[#2cc965] text-[#09150d] text-[10px] font-extrabold sidebar-text-hide">New</span>
+            </button>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Bottom Section: Settings & User Profile -->
+      <div class="space-y-3 pt-2">
+        <!-- Settings Button -->
+        <button data-menu="settings" onclick="switchMenu('settings')" class="nav-btn">
+          <div class="flex items-center gap-3">
+            <div class="nav-icon-box">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/>
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+              </svg>
+            </div>
+            <span class="sidebar-text-hide">Settings</span>
+          </div>
+        </button>
+
+        <div class="border-t border-white/[0.06] pt-3">
+          <div class="px-2 pb-2 text-[10px] font-bold tracking-wider text-[#5b6b61] uppercase sidebar-text-hide">
+            User Account
+          </div>
+
+          <div onclick="switchMenu('settings', 'security')" class="flex items-center justify-between p-1.5 rounded-2xl hover:bg-white/[0.05] transition cursor-pointer group">
+            <div class="flex items-center gap-2.5 min-w-0">
+              <div class="relative flex-shrink-0">
+                <!-- Inline SVG Avatar matching Alex Williamson -->
+                <svg class="w-9 h-9 rounded-full bg-[#213529] border border-emerald-500/30" viewBox="0 0 40 40">
+                  <rect width="40" height="40" rx="20" fill="#1b3324"/>
+                  <circle cx="20" cy="15" r="7" fill="#d9b99b"/>
+                  <path d="M8 36c1.5-7 6.5-10 12-10s10.5 3 12 10" fill="#2cc965"/>
+                  <path d="M14 13c1-3 4-4 6-4s5 1 6 4" stroke="#2c1d11" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                </svg>
+                <span class="w-2.5 h-2.5 rounded-full bg-[#2cc965] ring-2 ring-[#0d1510] absolute bottom-0 right-0"></span>
+              </div>
+              <div class="truncate sidebar-text-hide">
+                <div id="profileName" class="text-[12.5px] font-semibold text-white leading-tight truncate group-hover:text-[#2cc965] transition">Alex Williamson</div>
+                <div id="profileHandle" class="text-[11px] text-[#6d7d73] leading-tight">#alexw-1924</div>
+              </div>
+            </div>
+            <svg class="w-4 h-4 text-[#6d7d73] group-hover:text-white transition sidebar-text-hide flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==================== RIGHT MAIN VIEWPORT (Fixed Uniform Container) ==================== -->
+    <main class="main-viewport">
+
+      <!-- STICKY HEADER & SUB-MENU BAR -->
+      <header class="px-6 pt-5 pb-3 flex flex-wrap items-center justify-between gap-3 border-b border-black/[0.04] bg-[#f4f6f4]/90 backdrop-blur-md z-20 flex-shrink-0">
+        <!-- Left: Menu Title & Dynamic Sub-Menu Tabs -->
+        <div class="flex flex-wrap items-center gap-5">
+          <h1 id="mainHeaderTitle" class="text-[24px] font-bold tracking-tight text-[#111c15] leading-none">
+            Dashboard
+          </h1>
+
+          <!-- Animated Sub-Menu Tabs Container -->
+          <div id="subMenuTabsContainer" class="flex items-center gap-1 bg-[#e6ebe7] p-1 rounded-full">
+            <!-- Populated dynamically per menu -->
+          </div>
+        </div>
+
+        <!-- Right: Scroll Hint Pill + Notification Bell + Add Custom Widget Button -->
+        <div class="flex items-center gap-2.5">
+          <!-- Scrollable Content Indicator Pill -->
+          <button onclick="scrollToBottomSmooth()" title="Scroll down to see more content" class="hidden xl:flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-emerald-950/[0.05] hover:bg-emerald-950/[0.1] text-[#2b4c37] text-[11px] font-semibold transition">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#2cc965] animate-ping"></span>
+            <span>Scrollable View</span>
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 14l-7 7m0 0l-7-7m7 7V3"/>
+            </svg>
+          </button>
+
+          <!-- Notification Bell -->
+          <div class="relative">
+            <button onclick="toggleNotificationPopover()" class="w-9 h-9 rounded-full bg-white hover:bg-gray-50 border border-black/[0.05] flex items-center justify-center text-[#121d16] shadow-sm transition relative">
+              <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M10 2a6 6 0 00-6 6v3.586l-.707.707A1 1 0 004 14h12a1 1 0 00.707-1.707L16 11.586V8a6 6 0 00-6-6zM10 18a3 3 0 01-3-3h6a3 3 0 01-3 3z"/>
+              </svg>
+              <span id="notifDot" class="w-2 h-2 rounded-full bg-[#2cc965] ring-2 ring-white absolute top-1.5 right-2"></span>
+            </button>
+
+            <!-- Notification Popover -->
+            <div id="notifPopover" class="hidden absolute right-0 mt-2 w-80 bg-white rounded-2xl shadow-2xl border border-black/[0.06] p-3.5 z-50">
+              <div class="flex items-center justify-between pb-2.5 border-b border-gray-100">
+                <span class="text-xs font-bold text-gray-900">Live Telemetry Alerts</span>
+                <button onclick="clearNotifications()" class="text-[11px] font-semibold text-emerald-600 hover:underline">Mark all read</button>
+              </div>
+              <div class="divide-y divide-gray-100 max-h-60 overflow-y-auto my-1">
+                <div class="py-2.5 flex gap-2.5 items-start">
+                  <span class="w-2 h-2 rounded-full bg-emerald-500 mt-1.5 flex-shrink-0"></span>
+                  <div>
+                    <div class="text-xs font-semibold text-gray-800">Germany Plant #14 Exceeded Target</div>
+                    <div class="text-[11px] text-gray-500">Mechanical recycling reached 64.2% efficiency • 4m ago</div>
+                  </div>
+                </div>
+                <div class="py-2.5 flex gap-2.5 items-start">
+                  <span class="w-2 h-2 rounded-full bg-rose-500 mt-1.5 flex-shrink-0"></span>
+                  <div>
+                    <div class="text-xs font-semibold text-gray-800">Ukraine Sensor High Pollution Spike</div>
+                    <div class="text-[11px] text-gray-500">Regional index rose to 89% (+4.1%) • 19m ago</div>
+                  </div>
+                </div>
+                <div class="py-2.5 flex gap-2.5 items-start">
+                  <span class="w-2 h-2 rounded-full bg-amber-500 mt-1.5 flex-shrink-0"></span>
+                  <div>
+                    <div class="text-xs font-semibold text-gray-800">ESG Q4 Audit Report Ready</div>
+                    <div class="text-[11px] text-gray-500">Available in Reports → ESG Audits • 1h ago</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Add Custom Widget Button -->
+          <button onclick="openWidgetModal()" class="bg-[#141f18] hover:bg-[#1e2f24] active:scale-[0.98] text-white text-[12px] font-semibold px-4 py-2.5 rounded-xl shadow-sm transition flex items-center gap-1.5">
+            <span>Add Custom Widget</span>
+          </button>
+        </div>
+      </header>
+
+      <!-- SCROLLABLE DYNAMIC VIEW CONTAINER -->
+      <div id="viewportScrollContainer" class="content-scroll">
+        <div id="menuViewContent" class="pt-3">
+          <!-- Rendered dynamically via JavaScript -->
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ==================== QUICK SEARCH MODAL (⌘+F) ==================== -->
+  <div id="searchModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-[#131f17] border border-white/10 text-white w-full max-w-lg rounded-3xl p-5 shadow-2xl animate-page-enter">
+      <div class="flex items-center gap-3 border-b border-white/10 pb-3">
+        <svg class="w-5 h-5 text-[#2cc965]" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+        </svg>
+        <input id="quickSearchInput" oninput="filterQuickSearch(this.value)" type="text" placeholder="Jump to any menu, sub-menu, region, or metric..." class="w-full bg-transparent text-sm text-white placeholder-gray-400 focus:outline-none" />
+        <button onclick="closeSearchModal()" class="text-xs bg-white/10 hover:bg-white/20 px-2 py-1 rounded-lg text-gray-300">ESC</button>
+      </div>
+      <div id="quickSearchResults" class="mt-3 space-y-1.5 max-h-72 overflow-y-auto">
+        <!-- Populated dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== ADD CUSTOM WIDGET MODAL ==================== -->
+  <div id="widgetModal" class="hidden fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white text-[#111c15] w-full max-w-md rounded-3xl p-6 shadow-2xl animate-page-enter">
+      <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+        <div>
+          <h3 class="text-base font-bold">Add Custom Telemetry Widget</h3>
+          <p class="text-xs text-gray-500">Appends a live sustainability module into the current scrollable view</p>
+        </div>
+        <button onclick="closeWidgetModal()" class="w-8 h-8 rounded-full bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-600">✕</button>
+      </div>
+      <form onsubmit="handleCreateWidget(event)" class="space-y-4 mt-4">
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Widget Title</label>
+          <input id="newWidgetTitle" type="text" required placeholder="e.g. Ocean Microplastic Filtration Rate" class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-600" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Primary Value</label>
+            <input id="newWidgetValue" type="text" required placeholder="e.g. 94.8%" class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-600" />
+          </div>
+          <div>
+            <label class="block text-xs font-bold text-gray-700 mb-1">Monthly Delta</label>
+            <input id="newWidgetDelta" type="text" required placeholder="e.g. +6.4%" class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-600" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-bold text-gray-700 mb-1">Technology Category</label>
+          <select id="newWidgetTech" class="w-full px-3.5 py-2 rounded-xl border border-gray-200 text-sm focus:outline-none focus:border-emerald-600">
+            <option value="Mechanical">Mechanical Recycling</option>
+            <option value="Chemical">Chemical Depolymerization</option>
+            <option value="Energy recovery">Clean Energy Recovery</option>
+            <option value="Bio-Enzyme">Bio-Enzymatic Synthesis</option>
+          </select>
+        </div>
+        <div class="flex justify-end gap-2 pt-2">
+          <button type="button" onclick="closeWidgetModal()" class="px-4 py-2 rounded-xl text-xs font-semibold text-gray-600 hover:bg-gray-100">Cancel</button>
+          <button type="submit" class="px-4 py-2 rounded-xl text-xs font-semibold bg-[#121d16] hover:bg-[#1e3125] text-white">Insert Widget & Scroll</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==================== TOAST NOTIFICATION ==================== -->
+  <div id="toastBanner" class="fixed bottom-6 right-6 z-50 pointer-events-none opacity-0 translate-y-3 transition-all duration-300">
+    <div class="bg-[#111d15] text-white border border-emerald-500/30 px-4 py-2.5 rounded-2xl shadow-2xl flex items-center gap-2.5 text-xs font-semibold">
+      <span class="w-2 h-2 rounded-full bg-[#2cc965]"></span>
+      <span id="toastText">Workspace updated</span>
+    </div>
+  </div>
+
+  <!-- ==================== APPLICATION LOGIC ==================== -->
+  <script type="module" src="assets/js/main.js"></script>
+</body>
+</html>
